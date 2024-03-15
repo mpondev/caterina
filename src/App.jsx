@@ -8,35 +8,42 @@ import PageNotFound from './pages/PageNotFound';
 import Login from './pages/Login';
 import Settings from './pages/Settings';
 import Users from './pages/Users';
+import AppLayout from './ui/AppLayout';
+import { Navigate } from 'react-router-dom';
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <Dashboard />,
-  },
-  {
-    path: 'dashboard',
-    element: <Dashboard />,
-  },
-  {
-    path: 'bookings',
-    element: <Bookings />,
-  },
-  {
-    path: 'cabins',
-    element: <Cabins />,
-  },
-  {
-    path: 'users',
-    element: <Users />,
-  },
-  {
-    path: 'settings',
-    element: <Settings />,
-  },
-  {
-    path: 'account',
-    element: <Account />,
+    element: <AppLayout />,
+    children: [
+      {
+        path: '/',
+        element: <Navigate replace to="dashboard" />,
+      },
+      {
+        path: 'dashboard',
+        element: <Dashboard />,
+      },
+      {
+        path: 'bookings',
+        element: <Bookings />,
+      },
+      {
+        path: 'cabins',
+        element: <Cabins />,
+      },
+      {
+        path: 'users',
+        element: <Users />,
+      },
+      {
+        path: 'settings',
+        element: <Settings />,
+      },
+      {
+        path: 'account',
+        element: <Account />,
+      },
+    ],
   },
   {
     path: 'login',
