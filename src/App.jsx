@@ -1,15 +1,19 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from 'react-router-dom';
 
 import Account from './pages/Account';
+import Apartments from './pages/Apartments';
 import Bookings from './pages/Bookings';
-import Cabins from './pages/Cabins';
 import Dashboard from './pages/Dashboard';
 import PageNotFound from './pages/PageNotFound';
 import Login from './pages/Login';
 import Settings from './pages/Settings';
 import Users from './pages/Users';
+
 import AppLayout from './ui/AppLayout';
-import { Navigate } from 'react-router-dom';
 
 const router = createBrowserRouter([
   {
@@ -29,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'cabins',
-        element: <Cabins />,
+        element: <Apartments />,
       },
       {
         path: 'users',
