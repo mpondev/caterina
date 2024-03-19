@@ -12,7 +12,7 @@ function ApartmentTable() {
     data: apartments,
     error,
   } = useQuery({
-    queryKey: ['apartment'],
+    queryKey: ['apartments'],
     queryFn: getApartments,
   });
   console.log(apartments, error);
