@@ -1,14 +1,27 @@
+import { useState } from 'react';
+
 import ApartmentTable from '../features/apartments/ApartmentTable';
 
+import './Apartments.scss';
+import CreateApartmentForm from '../features/apartments/CreateApartmentForm';
+
 function Apartments() {
+  const [showForm, setShowForm] = useState(false);
+
   return (
-    <div>
-      <div>
-        <h1>All Apartments</h1>
-        <p>Filter / Sort</p>
+    <>
+      <div className="row">
+        <h1>Apartamentos</h1>
+        <p>Filtrar / Ordenar</p>
       </div>
+
       <ApartmentTable />
-    </div>
+
+      <button onClick={() => setShowForm(show => !show)}>
+        Añadir Apartamento
+      </button>
+      {showForm && <CreateApartmentForm />}
+    </>
   );
 }
 
