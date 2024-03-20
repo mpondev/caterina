@@ -24,7 +24,7 @@ function CreateApartmentForm() {
   });
 
   function onSubmit(data) {
-    mutate(data);
+    mutate({ ...data, image: data.image[0] });
   }
 
   return (
@@ -96,7 +96,13 @@ function CreateApartmentForm() {
       </FormRow>
 
       <FormRow label="Imagen" error={errors?.image?.message}>
-        <input type="text" id="image" accept="image/*" {...register('image')} />
+        <input
+          type="file"
+          id="image"
+          accept="image/*"
+          className="img-input"
+          {...register('image')}
+        />
       </FormRow>
 
       <div className="formRow">
