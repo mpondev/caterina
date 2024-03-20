@@ -3,11 +3,13 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
 import { createApartment } from '../../services/apiApartments';
+import FormRow from '../../ui/FormRow';
 
 import './CreateApartmentForm.scss';
 
 function CreateApartmentForm() {
-  const { handleSubmit, register, reset } = useForm();
+  const { formState, getValues, handleSubmit, register, reset } = useForm();
+  const { errors } = formState;
 
   const queryClient = useQueryClient();
 
@@ -27,49 +29,75 @@ function CreateApartmentForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="formRow">
-        <label htmlFor="apartment">Apartamento</label>
-        <input type="text" id="apartment" {...register('apartment')} />
-      </div>
+      <FormRow label="Apartamento" error={errors?.apartment?.message}>
+        <input
+          type="text"
+          id="apartment"
+          disabled={isCreating}
+          {...register('apartment', {
+            required: 'Este campo es obligatorio',
+          })}
+        />
+      </FormRow>
 
-      <div className="formRow">
-        <label htmlFor="max_capacity">Capacidad Máxima</label>
-        <input type="number" id="max_capacity" {...register('max_capacity')} />
-      </div>
+      <FormRow label="Capacidad Máxima" error={errors?.max_capacity?.message}>
+        <input
+          type="number"
+          id="max_capacity"
+          disabled={isCreating}
+          {...register('max_capacity', {
+            required: 'Este campo es obligatorio',
+            min: {
+              value: 1,
+              message: 'La capacidad debe ser mayor que 0',
+            },
+          })}
+        />
+      </FormRow>
 
-      <div className="formRow">
-        <label htmlFor="regular_price">Precio</label>
+      <FormRow label="Precio" error={errors?.regular_price?.message}>
         <input
           type="number"
           id="regular_price"
-          {...register('regular_price')}
+          disabled={isCreating}
+          {...register('regular_price', {
+            required: 'Este campo es obligatorio',
+            min: {
+              value: 1,
+              message: 'El precio debe ser mayor que 0',
+            },
+          })}
         />
-      </div>
+      </FormRow>
 
-      <div className="formRow">
-        <label htmlFor="discount">Descuento</label>
+      <FormRow label="Descuento" error={errors?.discount?.message}>
         <input
           type="number"
           id="discount"
+          disabled={isCreating}
           defaultValue={0}
-          {...register('discount')}
+          {...register('discount', {
+            required: 'Este campo es obligatorio',
+            validate: value =>
+              value <= getValues().regular_price ||
+              'El descuento debe ser inferior al precio',
+          })}
         />
-      </div>
+      </FormRow>
 
-      <div className="formRow">
-        <label htmlFor="description">Descripción</label>
+      <FormRow label="Descripción" error={errors?.description?.message}>
         <textarea
           name="description"
           id="description"
+          disabled={isCreating}
           defaultValue=""
           {...register('description')}
         ></textarea>
-      </div>
+      </FormRow>
 
-      <div className="formRow">
-        <label htmlFor="image">Imagen</label>
-        <input type="text" id="image" {...register('image')} />
-      </div>
+      <FormRow label="Imagen" error={errors?.image?.message}>
+        <input type="text" id="image" accept="image/*" {...register('image')} />
+      </FormRow>
 
       <div className="formRow">
         <button type="reset" className="btn btn--cancel">
