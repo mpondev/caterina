@@ -5,10 +5,23 @@ export async function getApartments() {
 
   if (error) {
     console.error(error);
-    throw new Error('Apartments could not be loaded');
+    throw new Error('Los apartamentos no se han podido cargar');
   }
 
   return data;
+}
+
+export async function createApartment(newApartment) {
+  const { data, error } = await supabase
+    .from('apartments')
+    .insert([newApartment])
+    .select();
+  console.log(data);
+
+  if (error) {
+    console.error(error);
+    throw new Error('El apartamento no se ha podido crear');
+  }
 }
 
 export async function deleteApartment(id) {
@@ -16,6 +29,6 @@ export async function deleteApartment(id) {
 
   if (error) {
     console.error(error);
-    throw new Error('Apartment could not be deleted');
+    throw new Error('El apartamento no se ha podido borrar');
   }
 }

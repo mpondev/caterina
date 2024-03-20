@@ -1,12 +1,28 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
+
+import { createApartment } from '../../services/apiApartments';
 
 import './CreateApartmentForm.scss';
 
 function CreateApartmentForm() {
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register, reset } = useForm();
+
+  const queryClient = useQueryClient();
+
+  const { isLoading: isCreating, mutate } = useMutation({
+    mutationFn: createApartment,
+    onSuccess: () => {
+      toast.success('Apartamento creado con éxito');
+      queryClient.invalidateQueries({ queryKey: ['apartments'] });
+      reset();
+    },
+    onError: err => toast.error(err.message),
+  });
 
   function onSubmit(data) {
-    console.log(data);
+    mutate(data);
   }
 
   return (
@@ -59,7 +75,9 @@ function CreateApartmentForm() {
         <button type="reset" className="btn btn--cancel">
           Cancelar
         </button>
-        <button className="btn">Añadir</button>
+        <button className="btn" disabled={isCreating}>
+          Añadir
+        </button>
       </div>
     </form>
   );
