@@ -11,19 +11,29 @@ export async function getApartments() {
   return data;
 }
 
-export async function createApartment(newApartment) {
+export async function createEditApartment(newApartment, id) {
+  const hasImagePath = newApartment.image?.startsWith?.(supabaseUrl);
+
   const imageName = `${Math.random()}-${newApartment.image.name}`.replaceAll(
     '/',
     ''
   );
-  const imagePath = `${supabaseUrl}/storage/v1/object/public/apartment-images/${imageName}`;
 
-  // Create apartment
-  const { data, error } = await supabase
-    .from('apartments')
-    .insert([{ ...newApartment, image: imagePath }])
-    .select();
-  console.log(data);
+  const imagePath = hasImagePath
+    ? newApartment.image
+    : `${supabaseUrl}/storage/v1/object/public/apartment-images/${imageName}`;
+
+  // Create/Edit apartment
+  let query = supabase.from('apartments');
+
+  // Create:
+  if (!id) query = query.insert([{ ...newApartment, image: imagePath }]);
+
+  // Edit:
+  if (id)
+    query = query.update({ ...newApartment, image: imagePath }).eq('id', id);
+
+  const { data, error } = await query.select().single();
 
   if (error) {
     console.error(error);
@@ -43,6 +53,8 @@ export async function createApartment(newApartment) {
       'La imagen del apartamento no se ha podido subir; el apartamento no ha sido creado'
     );
   }
+
+  return data;
 }
 
 export async function deleteApartment(id) {

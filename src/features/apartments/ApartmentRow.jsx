@@ -1,13 +1,16 @@
 import PropTypes from 'prop-types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
+import { useState } from 'react';
 
 import { formatCurrency } from '../../utils/helpers';
-
-import './ApartmentRow.scss';
 import { deleteApartment } from '../../services/apiApartments';
 
+import './ApartmentRow.scss';
+import CreateApartmentForm from './CreateApartmentForm';
+
 function ApartmentRow({ apartment }) {
+  const [showForm, setShowForm] = useState(false);
   const {
     apartment: apartmentName,
     discount,
@@ -31,16 +34,24 @@ function ApartmentRow({ apartment }) {
   });
 
   return (
-    <div className="apartmentRow" role="row">
-      <img src={image} alt="apartment image" className="apartmentRow--img" />
-      <div className="apartmentRow--name">{apartmentName}</div>
-      <div>Hasta {max_capacity} personas</div>
-      <div className="apartmentRow--price">{formatCurrency(regular_price)}</div>
-      <div className="apartmentRow--discount">{formatCurrency(discount)}</div>
-      <button onClick={() => mutate(apartmentId)} disabled={isDeleting}>
-        Eliminar
-      </button>
-    </div>
+    <>
+      <div className="apartmentRow" role="row">
+        <img src={image} alt="apartment image" className="apartmentRow--img" />
+        <div className="apartmentRow--name">{apartmentName}</div>
+        <div>Hasta {max_capacity} personas</div>
+        <div className="apartmentRow--price">
+          {formatCurrency(regular_price)}
+        </div>
+        <div className="apartmentRow--discount">{formatCurrency(discount)}</div>
+        <div>
+          <button onClick={() => setShowForm(!showForm)}>Editar</button>
+          <button onClick={() => mutate(apartmentId)} disabled={isDeleting}>
+            Eliminar
+          </button>
+        </div>
+      </div>
+      {showForm && <CreateApartmentForm apartmentToEdit={apartment} />}
+    </>
   );
 }
 

@@ -1,20 +1,25 @@
+import PropTypes from 'prop-types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
-import { createApartment } from '../../services/apiApartments';
+import { createEditApartment } from '../../services/apiApartments';
 import FormRow from '../../ui/FormRow';
 
 import './CreateApartmentForm.scss';
 
-function CreateApartmentForm() {
-  const { formState, getValues, handleSubmit, register, reset } = useForm();
+function CreateApartmentForm({ apartmentToEdit = {} }) {
+  const { id: editId, ...editValues } = apartmentToEdit;
+  const isEditSession = Boolean(editId);
+  const { formState, getValues, handleSubmit, register, reset } = useForm({
+    defaultValues: isEditSession ? editValues : {},
+  });
   const { errors } = formState;
 
   const queryClient = useQueryClient();
 
-  const { isLoading: isCreating, mutate } = useMutation({
-    mutationFn: createApartment,
+  const { isLoading: isCreating, mutate: createApartment } = useMutation({
+    mutationFn: createEditApartment,
     onSuccess: () => {
       toast.success('Apartamento creado con éxito');
       queryClient.invalidateQueries({ queryKey: ['apartments'] });
@@ -23,8 +28,25 @@ function CreateApartmentForm() {
     onError: err => toast.error(err.message),
   });
 
+  const { isLoading: isEditing, mutate: editApartment } = useMutation({
+    mutationFn: ({ id, newApartmentData }) =>
+      createEditApartment(id, newApartmentData),
+    onSuccess: () => {
+      toast.success('Apartamento actualizado con éxito');
+      queryClient.invalidateQueries({ queryKey: ['apartments'] });
+      reset();
+    },
+    onError: err => toast.error(err.message),
+  });
+
+  const isWorking = isCreating || isEditing;
+
   function onSubmit(data) {
-    mutate({ ...data, image: data.image[0] });
+    const image = typeof data.image === 'string' ? data.image : data.image[0];
+
+    if (isEditSession)
+      editApartment({ newApartmentData: { ...data, image }, id: editId });
+    else createApartment({ ...data, image: image });
   }
 
   return (
@@ -33,7 +55,7 @@ function CreateApartmentForm() {
         <input
           type="text"
           id="apartment"
-          disabled={isCreating}
+          disabled={isWorking}
           {...register('apartment', {
             required: 'Este campo es obligatorio',
           })}
@@ -44,7 +66,7 @@ function CreateApartmentForm() {
         <input
           type="number"
           id="max_capacity"
-          disabled={isCreating}
+          disabled={isWorking}
           {...register('max_capacity', {
             required: 'Este campo es obligatorio',
             min: {
@@ -59,7 +81,7 @@ function CreateApartmentForm() {
         <input
           type="number"
           id="regular_price"
-          disabled={isCreating}
+          disabled={isWorking}
           {...register('regular_price', {
             required: 'Este campo es obligatorio',
             min: {
@@ -74,7 +96,7 @@ function CreateApartmentForm() {
         <input
           type="number"
           id="discount"
-          disabled={isCreating}
+          disabled={isWorking}
           defaultValue={0}
           {...register('discount', {
             required: 'Este campo es obligatorio',
@@ -89,7 +111,7 @@ function CreateApartmentForm() {
         <textarea
           name="description"
           id="description"
-          disabled={isCreating}
+          disabled={isWorking}
           defaultValue=""
           {...register('description')}
         ></textarea>
@@ -101,7 +123,9 @@ function CreateApartmentForm() {
           id="image"
           accept="image/*"
           className="img-input"
-          {...register('image')}
+          {...register('image', {
+            required: isEditSession ? false : 'Este campo es obligatorio',
+          })}
         />
       </FormRow>
 
@@ -109,12 +133,16 @@ function CreateApartmentForm() {
         <button type="reset" className="btn btn--cancel">
           Cancelar
         </button>
-        <button className="btn" disabled={isCreating}>
-          Añadir
+        <button className="btn" disabled={isWorking}>
+          {isEditSession ? 'Editar' : 'Añadir'}
         </button>
       </div>
     </form>
   );
 }
+
+CreateApartmentForm.propTypes = {
+  apartmentToEdit: PropTypes.object,
+};
 
 export default CreateApartmentForm;
