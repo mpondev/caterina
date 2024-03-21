@@ -1,14 +1,17 @@
 import PropTypes from 'prop-types';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-hot-toast';
 
-import { createEditApartment } from '../../services/apiApartments';
+import { useCreateApartment } from './useCreateApartment';
+import { useEditApartment } from './useEditApartment';
 import FormRow from '../../ui/FormRow';
 
 import './CreateApartmentForm.scss';
 
 function CreateApartmentForm({ apartmentToEdit = {} }) {
+  const { createApartment, isCreating } = useCreateApartment();
+  const { editApartment, isEditing } = useEditApartment();
+  const isWorking = isCreating || isEditing;
+
   const { id: editId, ...editValues } = apartmentToEdit;
   const isEditSession = Boolean(editId);
   const { formState, getValues, handleSubmit, register, reset } = useForm({
@@ -16,37 +19,23 @@ function CreateApartmentForm({ apartmentToEdit = {} }) {
   });
   const { errors } = formState;
 
-  const queryClient = useQueryClient();
-
-  const { isLoading: isCreating, mutate: createApartment } = useMutation({
-    mutationFn: createEditApartment,
-    onSuccess: () => {
-      toast.success('Apartamento creado con éxito');
-      queryClient.invalidateQueries({ queryKey: ['apartments'] });
-      reset();
-    },
-    onError: err => toast.error(err.message),
-  });
-
-  const { isLoading: isEditing, mutate: editApartment } = useMutation({
-    mutationFn: ({ id, newApartmentData }) =>
-      createEditApartment(id, newApartmentData),
-    onSuccess: () => {
-      toast.success('Apartamento actualizado con éxito');
-      queryClient.invalidateQueries({ queryKey: ['apartments'] });
-      reset();
-    },
-    onError: err => toast.error(err.message),
-  });
-
-  const isWorking = isCreating || isEditing;
-
   function onSubmit(data) {
     const image = typeof data.image === 'string' ? data.image : data.image[0];
 
     if (isEditSession)
-      editApartment({ newApartmentData: { ...data, image }, id: editId });
-    else createApartment({ ...data, image: image });
+      editApartment(
+        { newApartmentData: { ...data, image }, id: editId },
+        {
+          onSuccess: () => reset(),
+        }
+      );
+    else
+      createApartment(
+        { ...data, image: image },
+        {
+          onSuccess: () => reset(),
+        }
+      );
   }
 
   return (

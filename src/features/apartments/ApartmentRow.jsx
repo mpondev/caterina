@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toast } from 'react-hot-toast';
 import { useState } from 'react';
 
+import { useDeleteApartment } from './useDeleteApartment';
+import CreateApartmentForm from './CreateApartmentForm';
 import { formatCurrency } from '../../utils/helpers';
-import { deleteApartment } from '../../services/apiApartments';
 
 import './ApartmentRow.scss';
-import CreateApartmentForm from './CreateApartmentForm';
 
 function ApartmentRow({ apartment }) {
   const [showForm, setShowForm] = useState(false);
+  const { deleteApartment, isDeleting } = useDeleteApartment();
+
   const {
     apartment: apartmentName,
     discount,
@@ -19,19 +19,6 @@ function ApartmentRow({ apartment }) {
     max_capacity,
     regular_price,
   } = apartment;
-
-  const queryClient = useQueryClient();
-
-  const { isLoading: isDeleting, mutate } = useMutation({
-    mutationFn: deleteApartment,
-    onSuccess: () => {
-      toast.success('Apartamento eliminado con éxito');
-      queryClient.invalidateQueries({
-        queryKey: ['apartments'],
-      });
-    },
-    onError: err => toast.error(err.message),
-  });
 
   return (
     <>
@@ -42,10 +29,19 @@ function ApartmentRow({ apartment }) {
         <div className="apartmentRow--price">
           {formatCurrency(regular_price)}
         </div>
-        <div className="apartmentRow--discount">{formatCurrency(discount)}</div>
+        {discount ? (
+          <div className="apartmentRow--discount">
+            {formatCurrency(discount)}
+          </div>
+        ) : (
+          <span>&mdash;</span>
+        )}
         <div>
           <button onClick={() => setShowForm(!showForm)}>Editar</button>
-          <button onClick={() => mutate(apartmentId)} disabled={isDeleting}>
+          <button
+            onClick={() => deleteApartment(apartmentId)}
+            disabled={isDeleting}
+          >
             Eliminar
           </button>
         </div>

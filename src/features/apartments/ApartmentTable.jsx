@@ -1,21 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-
-import { getApartments } from '../../services/apiApartments';
 import ApartmentRow from './ApartmentRow';
 import Spinner from '../../ui/Spinner';
 
 import './ApartmentTable.scss';
+import { useApartments } from './useApartments';
 
 function ApartmentTable() {
-  const {
-    isLoading,
-    data: apartments,
-    error,
-  } = useQuery({
-    queryKey: ['apartments'],
-    queryFn: getApartments,
-  });
-  console.log(apartments, error);
+  const { apartments, isLoading } = useApartments();
 
   if (isLoading) return <Spinner />;
 

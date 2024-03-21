@@ -11,7 +11,7 @@ export async function getApartments() {
   return data;
 }
 
-export async function createEditApartment(newApartment, id) {
+export async function createEditApartment(id, newApartment) {
   const hasImagePath = newApartment.image?.startsWith?.(supabaseUrl);
 
   const imageName = `${Math.random()}-${newApartment.image.name}`.replaceAll(
