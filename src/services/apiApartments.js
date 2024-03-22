@@ -11,7 +11,7 @@ export async function getApartments() {
   return data;
 }
 
-export async function createEditApartment(id, newApartment) {
+export async function createEditApartment(newApartment, id) {
   const hasImagePath = newApartment.image?.startsWith?.(supabaseUrl);
 
   const imageName = `${Math.random()}-${newApartment.image.name}`.replaceAll(
@@ -41,6 +41,8 @@ export async function createEditApartment(id, newApartment) {
   }
 
   // Upload image
+  if (hasImagePath) return data;
+
   const { error: storageError } = await supabase.storage
     .from('apartment-images')
     .upload(imageName, newApartment.image);

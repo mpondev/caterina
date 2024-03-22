@@ -7,8 +7,8 @@ export function useEditApartment() {
   const queryClient = useQueryClient();
 
   const { isLoading: isEditing, mutate: editApartment } = useMutation({
-    mutationFn: ({ id, newApartmentData }) =>
-      createEditApartment(id, newApartmentData),
+    mutationFn: ({ newApartmentData, id }) =>
+      createEditApartment(newApartmentData, id),
     onSuccess: () => {
       toast.success('Apartamento actualizado con éxito');
       queryClient.invalidateQueries({ queryKey: ['apartments'] });
