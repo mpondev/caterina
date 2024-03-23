@@ -4,6 +4,7 @@ import { HiPencil, HiSquare2Stack, HiTrash } from 'react-icons/hi2';
 import { useCreateApartment } from './useCreateApartment';
 import { useDeleteApartment } from './useDeleteApartment';
 import CreateApartmentForm from './CreateApartmentForm';
+import ConfirmDelete from '../../ui/ConfirmDelete';
 import Modal from '../../ui/Modal';
 import { formatCurrency } from '../../utils/helpers';
 
@@ -60,12 +61,19 @@ function ApartmentRow({ apartment }) {
           <Modal.Window name="edit">
             <CreateApartmentForm apartmentToEdit={apartment} />
           </Modal.Window>
-          <button
-            onClick={() => deleteApartment(apartmentId)}
-            disabled={isDeleting}
-          >
-            <HiTrash />
-          </button>
+
+          <Modal.Open opens="delete">
+            <button>
+              <HiTrash />
+            </button>
+          </Modal.Open>
+          <Modal.Window name="delete">
+            <ConfirmDelete
+              resourceName="apartments"
+              disabled={isDeleting}
+              onConfirm={() => deleteApartment(apartmentId)}
+            />
+          </Modal.Window>
         </Modal>
       </div>
     </div>
