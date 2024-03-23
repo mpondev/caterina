@@ -1,15 +1,17 @@
 form {
-  padding: 2.4rem 4rem;
-  overflow: hidden;
-  font-size: 1.4rem;
+  &.regularStyle {
+    padding: 2.4rem 4rem;
+    overflow: hidden;
+    font-size: 1.4rem;
 
-  // No Modal styles
-  background-color: var(--color-grey-0);
-  border: 1px solid var(--color-grey-100);
-  border-radius: var(--border-radius-md);
+    background-color: var(--color-grey-0);
+    border: 1px solid var(--color-grey-100);
+    border-radius: var(--border-radius-md);
+  }
 
-  // Modal styles
-  //     width: 80rem;
+  &.modalStyle {
+    width: 80rem;
+  }
 
   .img-input {
     border-radius: var(--border-radius-sm);

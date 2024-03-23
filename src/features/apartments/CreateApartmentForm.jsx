@@ -7,7 +7,7 @@ import FormRow from '../../ui/FormRow';
 
 import './CreateApartmentForm.scss';
 
-function CreateApartmentForm({ apartmentToEdit = {} }) {
+function CreateApartmentForm({ apartmentToEdit = {}, onCloseModal }) {
   const { createApartment, isCreating } = useCreateApartment();
   const { editApartment, isEditing } = useEditApartment();
   const isWorking = isCreating || isEditing;
@@ -26,20 +26,29 @@ function CreateApartmentForm({ apartmentToEdit = {} }) {
       editApartment(
         { newApartmentData: { ...data, image }, id: editId },
         {
-          onSuccess: () => reset(),
+          onSuccess: () => {
+            reset();
+            onCloseModal?.();
+          },
         }
       );
     else
       createApartment(
         { ...data, image: image },
         {
-          onSuccess: () => reset(),
+          onSuccess: () => {
+            reset();
+            onCloseModal?.();
+          },
         }
       );
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={onCloseModal ? 'modalStyle' : 'regularStyle'}
+    >
       <FormRow label="Apartamento" error={errors?.apartment?.message}>
         <input
           type="text"
@@ -119,7 +128,11 @@ function CreateApartmentForm({ apartmentToEdit = {} }) {
       </FormRow>
 
       <div className="formRow">
-        <button type="reset" className="btn btn--cancel">
+        <button
+          type="reset"
+          className="btn btn--cancel"
+          onClick={() => onCloseModal?.()}
+        >
           Cancelar
         </button>
         <button className="btn" disabled={isWorking}>
@@ -132,6 +145,7 @@ function CreateApartmentForm({ apartmentToEdit = {} }) {
 
 CreateApartmentForm.propTypes = {
   apartmentToEdit: PropTypes.object,
+  onCloseModal: PropTypes.func,
 };
 
 export default CreateApartmentForm;

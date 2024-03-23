@@ -1,13 +1,9 @@
-import { useState } from 'react';
-
+import AddApartment from '../features/apartments/AddApartment';
 import ApartmentTable from '../features/apartments/ApartmentTable';
 
 import './Apartments.scss';
-import CreateApartmentForm from '../features/apartments/CreateApartmentForm';
 
 function Apartments() {
-  const [showForm, setShowForm] = useState(false);
-
   return (
     <>
       <div className="row">
@@ -17,10 +13,7 @@ function Apartments() {
 
       <ApartmentTable />
 
-      <button onClick={() => setShowForm(show => !show)}>
-        Añadir Apartamento
-      </button>
-      {showForm && <CreateApartmentForm />}
+      <AddApartment />
     </>
   );
 }
