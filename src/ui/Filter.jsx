@@ -1,31 +1,38 @@
+import PropTypes from 'prop-types';
 import { useSearchParams } from 'react-router-dom';
 
 import './Filter.scss';
 
-function Filter() {
+function Filter({ filterField, options }) {
   const [searchParams, setSearchParams] = useSearchParams();
+  const currentFilter = searchParams.get(filterField) || options.at(0).value;
 
   function handleClick(value) {
-    searchParams.set('discount', value);
+    searchParams.set(filterField, value);
     setSearchParams(searchParams);
   }
 
   return (
     <div className="filter">
-      <button className="filter-btn" onClick={() => handleClick('all')}>
-        Todo
-      </button>
-      <button className="filter-btn" onClick={() => handleClick('no-discount')}>
-        Sin Descuento
-      </button>
-      <button
-        className="filter-btn"
-        onClick={() => handleClick('with-discount')}
-      >
-        Con Descuento
-      </button>
+      {options.map(option => (
+        <button
+          className={
+            option.value === currentFilter ? 'active filter-btn' : 'filter-btn'
+          }
+          onClick={() => handleClick(`${option.value}`)}
+          key={option.value}
+          disabled={option.value === currentFilter}
+        >
+          {option.label}
+        </button>
+      ))}
     </div>
   );
 }
+
+Filter.propTypes = {
+  filterField: PropTypes.string,
+  options: PropTypes.array,
+};
 
 export default Filter;
