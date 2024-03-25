@@ -6,6 +6,7 @@ import { useDeleteApartment } from './useDeleteApartment';
 import CreateApartmentForm from './CreateApartmentForm';
 import ConfirmDelete from '../../ui/ConfirmDelete';
 import Modal from '../../ui/Modal';
+import Table from '../../ui/Table';
 import { formatCurrency } from '../../utils/helpers';
 
 import './ApartmentRow.scss';
@@ -36,7 +37,7 @@ function ApartmentRow({ apartment }) {
   }
 
   return (
-    <div className="apartmentRow" role="row">
+    <Table.Row className="apartmentRow">
       <img src={image} alt="apartment image" className="apartmentRow--img" />
       <div className="apartmentRow--name">{apartmentName}</div>
       <div>Hasta {max_capacity} personas</div>
@@ -76,7 +77,7 @@ function ApartmentRow({ apartment }) {
           </Modal.Window>
         </Modal>
       </div>
-    </div>
+    </Table.Row>
   );
 }
 
