@@ -5,6 +5,7 @@ import { useCreateApartment } from './useCreateApartment';
 import { useDeleteApartment } from './useDeleteApartment';
 import CreateApartmentForm from './CreateApartmentForm';
 import ConfirmDelete from '../../ui/ConfirmDelete';
+import Menus from '../../ui/Menus';
 import Modal from '../../ui/Modal';
 import Table from '../../ui/Table';
 import { formatCurrency } from '../../utils/helpers';
@@ -13,7 +14,7 @@ import './ApartmentRow.scss';
 
 function ApartmentRow({ apartment }) {
   const { deleteApartment, isDeleting } = useDeleteApartment();
-  const { createApartment, isCreating } = useCreateApartment();
+  const { createApartment } = useCreateApartment();
 
   const {
     apartment: apartmentName,
@@ -49,32 +50,36 @@ function ApartmentRow({ apartment }) {
       )}
 
       <div>
-        <button onClick={handleDuplicate} disabled={isCreating}>
-          <HiSquare2Stack />
-        </button>
-
         <Modal>
-          <Modal.Open opens="edit">
-            <button>
-              <HiPencil />
-            </button>
-          </Modal.Open>
-          <Modal.Window name="edit">
-            <CreateApartmentForm apartmentToEdit={apartment} />
-          </Modal.Window>
+          <Menus.Menu>
+            <Menus.Toggle id={apartment.id} />
 
-          <Modal.Open opens="delete">
-            <button>
-              <HiTrash />
-            </button>
-          </Modal.Open>
-          <Modal.Window name="delete">
-            <ConfirmDelete
-              resourceName="apartments"
-              disabled={isDeleting}
-              onConfirm={() => deleteApartment(apartmentId)}
-            />
-          </Modal.Window>
+            <Menus.List id={apartment.id}>
+              <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
+                Duplicate
+              </Menus.Button>
+
+              <Modal.Open opens="edit">
+                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+              </Modal.Open>
+
+              <Modal.Open opens="delete">
+                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+              </Modal.Open>
+            </Menus.List>
+
+            <Modal.Window name="edit">
+              <CreateApartmentForm apartmentToEdit={apartment} />
+            </Modal.Window>
+
+            <Modal.Window name="delete">
+              <ConfirmDelete
+                resourceName="apartments"
+                disabled={isDeleting}
+                onConfirm={() => deleteApartment(apartmentId)}
+              />
+            </Modal.Window>
+          </Menus.Menu>
         </Modal>
       </div>
     </Table.Row>

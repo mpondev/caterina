@@ -47,7 +47,7 @@ function Window({ children, name }) {
 }
 
 Modal.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   onClose: PropTypes.func,
 };
 
