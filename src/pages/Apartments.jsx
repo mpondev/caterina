@@ -7,8 +7,8 @@ import './Apartments.scss';
 function Apartments() {
   return (
     <>
-      <div className="row">
-        <h1>Apartamentos</h1>
+      <div className="apartments">
+        <h1 className="apartments-heading">Apartamentos</h1>
         <ApartmentTableOperations />
       </div>
 
