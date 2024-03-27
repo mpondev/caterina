@@ -1,0 +1,10 @@
+.bookings {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &-heading {
+    font-size: 3rem;
+    font-weight: 600;
+  }
+}

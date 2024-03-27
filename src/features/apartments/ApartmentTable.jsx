@@ -11,6 +11,7 @@ function ApartmentTable() {
   const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
+  if (!apartments.length) return <p>No se han encontrado apartamentos</p>;
 
   // FILTER
   const filterValue = searchParams.get('discount') || 'all';

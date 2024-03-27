@@ -1,0 +1,50 @@
+.apartment {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-grey-600);
+  font-family: 'Sono';
+}
+
+.stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
+  & span:first-child {
+    font-weight: 500;
+  }
+
+  & span:last-child {
+    color: var(--color-grey-500);
+    font-size: 1.2rem;
+  }
+}
+
+.tag {
+  width: fit-content;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.4rem 1.2rem;
+  border-radius: 100px;
+
+  &.unconfirmed {
+    color: var(--color-blue-700);
+    background-color: var(--color-blue-100);
+  }
+
+  &.checked-in {
+    color: var(--color-green-700);
+    background-color: var(--color-green-100);
+  }
+
+  &.checked-out {
+    color: var(--color-silver-700);
+    background-color: var(--color-silver-100);
+  }
+}
+
+.amount {
+  font-family: 'Sono';
+  font-weight: 500;
+}
