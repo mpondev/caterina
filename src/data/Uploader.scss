@@ -1,0 +1,25 @@
+.uploader-btns {
+  margin-top: auto;
+  background-color: #e0e7ff;
+  padding: 8px;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  button {
+    border: none;
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-sm);
+    color: var(--color-brand-50);
+    background-color: var(--color-brand-600);
+    font-size: 1.4rem;
+    padding: 1.2rem 1.6rem;
+    font-weight: 500;
+
+    &:hover {
+      background-color: var(--color-brand-700);
+    }
+  }
+}
