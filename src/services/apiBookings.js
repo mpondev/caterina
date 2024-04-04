@@ -1,12 +1,18 @@
 import supabase from './supabase';
 import { getToday } from '../utils/helpers';
 
-export async function getBookings() {
-  const { data, error } = await supabase
+export async function getBookings({ filter }) {
+  let query = supabase
     .from('bookings')
     .select(
       'id, created_at, start_date, end_date, num_nights, num_guests, status, total_price, apartments(apartment), guests(full_name, email)'
     );
+
+  // FILTER
+  if (filter !== null)
+    query = query[filter.method || 'eq'](filter.field, filter.value);
+
+  const { data, error } = await query;
 
   if (error) {
     console.error(error);
