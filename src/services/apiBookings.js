@@ -1,11 +1,13 @@
 import supabase from './supabase';
+import { PAGE_SIZE } from '../utils/constants';
 import { getToday } from '../utils/helpers';
 
-export async function getBookings({ filter, sortBy }) {
+export async function getBookings({ filter, sortBy, page }) {
   let query = supabase
     .from('bookings')
     .select(
-      'id, created_at, start_date, end_date, num_nights, num_guests, status, total_price, apartments(apartment), guests(full_name, email)'
+      'id, created_at, start_date, end_date, num_nights, num_guests, status, total_price, apartments(apartment), guests(full_name, email)',
+      { count: 'exact' }
     );
 
   // FILTER
@@ -17,14 +19,20 @@ export async function getBookings({ filter, sortBy }) {
       ascending: sortBy.direction === 'asc',
     });
 
-  const { data, error } = await query;
+  if (page) {
+    const from = (page - 1) * PAGE_SIZE;
+    const to = from + PAGE_SIZE - 1;
+    query = query.range(from, to);
+  }
+
+  const { count, data, error } = await query;
 
   if (error) {
     console.error(error);
     throw new Error('Las reservas no se han podido cargar');
   }
 
-  return data;
+  return { count, data };
 }
 
 export async function getBooking(id) {
