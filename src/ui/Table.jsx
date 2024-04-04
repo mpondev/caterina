@@ -73,7 +73,7 @@ function Footer({ children }) {
 }
 
 Footer.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.object,
 };
 
 Table.Header = Header;
