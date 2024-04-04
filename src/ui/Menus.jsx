@@ -84,7 +84,7 @@ function List({ children, id }) {
 }
 
 List.propTypes = {
-  children: PropTypes.array,
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   id: PropTypes.number,
 };
 

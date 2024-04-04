@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import { format, isToday } from 'date-fns';
+import { HiEye } from 'react-icons/hi2';
 
+import Menus from '../../ui/Menus';
 import Table from '../../ui/Table';
 import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
 
@@ -8,7 +11,7 @@ import './BookingRow.scss';
 
 function BookingRow({
   booking: {
-    // id: bookingId,
+    id: bookingId,
     // created_at,
     start_date,
     end_date,
@@ -20,6 +23,8 @@ function BookingRow({
     apartments: { apartment: apartment_name },
   },
 }) {
+  const navigate = useNavigate();
+
   return (
     <Table.Row>
       <div className="apartment">{apartment_name}</div>
@@ -45,6 +50,19 @@ function BookingRow({
       <span className={`tag ${status}`}>{status.replace('-', ' ')}</span>
 
       <div className="amount">{formatCurrency(total_price)}</div>
+
+      <Menus.Menu>
+        <Menus.Toggle id={bookingId} />
+
+        <Menus.List id={bookingId}>
+          <Menus.Button
+            icon={<HiEye />}
+            onClick={() => navigate(`/bookings/${bookingId}`)}
+          >
+            Ver detalles
+          </Menus.Button>
+        </Menus.List>
+      </Menus.Menu>
     </Table.Row>
   );
 }

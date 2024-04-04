@@ -9,6 +9,7 @@ import { Toaster } from 'react-hot-toast';
 
 import Account from './pages/Account';
 import Apartments from './pages/Apartments';
+import Booking from './pages/Booking';
 import Bookings from './pages/Bookings';
 import Dashboard from './pages/Dashboard';
 import PageNotFound from './pages/PageNotFound';
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: 'bookings',
         element: <Bookings />,
+      },
+      {
+        path: 'bookings/:bookingId',
+        element: <Booking />,
       },
       {
         path: 'cabins',
