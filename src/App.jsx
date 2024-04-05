@@ -11,6 +11,7 @@ import Account from './pages/Account';
 import Apartments from './pages/Apartments';
 import Booking from './pages/Booking';
 import Bookings from './pages/Bookings';
+import CheckIn from './pages/CheckIn';
 import Dashboard from './pages/Dashboard';
 import PageNotFound from './pages/PageNotFound';
 import Login from './pages/Login';
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: 'bookings/:bookingId',
         element: <Booking />,
+      },
+      {
+        path: 'checkin/:bookingId',
+        element: <CheckIn />,
       },
       {
         path: 'cabins',
