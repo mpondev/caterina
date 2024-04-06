@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { useMoveBack } from '../../hooks/useMoveBack';
 import { useBooking } from './useBooking';
 import { useCheckOut } from '../check-in-out/useCheckOut';
+import { useDeleteBooking } from './useDeleteBooking';
 import BookingDataBox from './BookingDataBox';
+import ConfirmDelete from '../../ui/ConfirmDelete';
+import Modal from '../../ui/Modal';
 import Spinner from '../../ui/Spinner';
 
 import './BookingDetail.scss';
@@ -11,6 +14,7 @@ import './BookingDetail.scss';
 function BookingDetail() {
   const { booking, isLoading } = useBooking();
   const { checkout, isCheckingOut } = useCheckOut();
+  const { deleteBooking, isDeleting } = useDeleteBooking();
 
   const moveBack = useMoveBack();
   const navigate = useNavigate();
@@ -45,6 +49,23 @@ function BookingDetail() {
             Check out
           </button>
         )}
+
+        <Modal>
+          <Modal.Open opens="delete">
+            <button className="delete-btn">Eliminar reserva</button>
+          </Modal.Open>
+          <Modal.Window name="delete">
+            <ConfirmDelete
+              resourceName="booking"
+              disabled={isDeleting}
+              onConfirm={() =>
+                deleteBooking(bookingId, {
+                  onSettled: () => navigate(-1),
+                })
+              }
+            />
+          </Modal.Window>
+        </Modal>
 
         <button className="bck-btn" onClick={moveBack}>
           Volver
