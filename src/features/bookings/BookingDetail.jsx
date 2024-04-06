@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useMoveBack } from '../../hooks/useMoveBack';
 import { useBooking } from './useBooking';
+import { useCheckOut } from '../check-in-out/useCheckOut';
 import BookingDataBox from './BookingDataBox';
 import Spinner from '../../ui/Spinner';
 
@@ -9,6 +10,8 @@ import './BookingDetail.scss';
 
 function BookingDetail() {
   const { booking, isLoading } = useBooking();
+  const { checkout, isCheckingOut } = useCheckOut();
+
   const moveBack = useMoveBack();
   const navigate = useNavigate();
 
@@ -34,6 +37,12 @@ function BookingDetail() {
         {status === 'unconfirmed' && (
           <button onClick={() => navigate(`/checkin/${bookingId}`)}>
             Check in
+          </button>
+        )}
+
+        {status === 'checked-in' && (
+          <button onClick={() => checkout(bookingId)} disabled={isCheckingOut}>
+            Check out
           </button>
         )}
 

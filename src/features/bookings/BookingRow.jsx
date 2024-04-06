@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { format, isToday } from 'date-fns';
-import { HiArrowDownOnSquare, HiEye } from 'react-icons/hi2';
+import { HiArrowDownOnSquare, HiArrowUpOnSquare, HiEye } from 'react-icons/hi2';
 
 import Menus from '../../ui/Menus';
 import Table from '../../ui/Table';
 import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
+import { useCheckOut } from '../check-in-out/useCheckOut';
 
 import './BookingRow.scss';
 
@@ -24,6 +25,7 @@ function BookingRow({
   },
 }) {
   const navigate = useNavigate();
+  const { checkout, isCheckingOut } = useCheckOut();
 
   return (
     <Table.Row>
@@ -68,6 +70,16 @@ function BookingRow({
               onClick={() => navigate(`/checkin/${bookingId}`)}
             >
               Check in
+            </Menus.Button>
+          )}
+
+          {status === 'checked-in' && (
+            <Menus.Button
+              icon={<HiArrowUpOnSquare />}
+              onClick={() => checkout(bookingId)}
+              disabled={isCheckingOut}
+            >
+              Check out
             </Menus.Button>
           )}
         </Menus.List>
