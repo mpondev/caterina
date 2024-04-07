@@ -1,15 +1,22 @@
 import { useForm } from 'react-hook-form';
+import { useSignup } from './useSignup';
 
 import './SignupForm.scss';
 
 // Email regex: /\S+@\S+\.\S+/
 
 function SignupForm() {
+  const { signup, isLoading } = useSignup();
   const { register, formState, getValues, handleSubmit, reset } = useForm();
   const { errors } = formState;
 
-  function onSubmit(data) {
-    console.log(data);
+  function onSubmit({ fullName, email, password }) {
+    signup(
+      { fullName, email, password },
+      {
+        onSettled: () => reset(),
+      }
+    );
   }
 
   return (
@@ -19,6 +26,7 @@ function SignupForm() {
         <input
           type="text"
           id="fullName"
+          disabled={isLoading}
           {...register('fullName', { required: 'Este campo es requerido' })}
         />
         {errors && <span>{errors?.fullName?.message}</span>}
@@ -29,6 +37,7 @@ function SignupForm() {
         <input
           type="email"
           id="email"
+          disabled={isLoading}
           {...register('email', {
             required: 'Este campo es requerido',
             pattern: {
@@ -45,6 +54,7 @@ function SignupForm() {
         <input
           type="password"
           id="password"
+          disabled={isLoading}
           {...register('password', {
             required: 'Este campo es requerido',
             minLength: {
@@ -61,6 +71,7 @@ function SignupForm() {
         <input
           type="password"
           id="passwordConfirm"
+          disabled={isLoading}
           {...register('passwordConfirm', {
             required: 'Este campo es requerido',
             validate: value =>
@@ -73,10 +84,15 @@ function SignupForm() {
 
       <div className="signup-form--row">
         {/* type is an HTML attribute! */}
-        <button className="cancel-btn" type="reset" onClick={reset}>
+        <button
+          className="cancel-btn"
+          type="reset"
+          disabled={isLoading}
+          onClick={reset}
+        >
           Cancelar
         </button>
-        <button>Crear nuevo usuario</button>
+        <button disabled={isLoading}>Crear nuevo usuario</button>
       </div>
     </form>
   );
