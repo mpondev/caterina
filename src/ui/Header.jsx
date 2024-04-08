@@ -1,11 +1,13 @@
-import Logout from '../features/authentication/Logout';
+import HeaderMenu from './HeaderMenu';
+import UserAvatar from '../features/authentication/UserAvatar';
 
 import './Header.scss';
 
 function Header() {
   return (
     <header>
-      <Logout />
+      <UserAvatar />
+      <HeaderMenu />
     </header>
   );
 }
