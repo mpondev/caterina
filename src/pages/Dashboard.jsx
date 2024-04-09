@@ -1,5 +1,16 @@
+import DashboardFilter from '../features/dashboard/DashboardFilter';
+import DashboardLayout from '../features/dashboard/DashboardLayout';
+
 function Dashboard() {
-  return <div>Dashboard</div>;
+  return (
+    <>
+      <div className="dashboard-row">
+        <h1>Dashboard</h1>
+        <DashboardFilter />
+      </div>
+      <DashboardLayout />
+    </>
+  );
 }
 
 export default Dashboard;
