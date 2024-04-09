@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
 
+import { DarkModeProvider } from './context/DarkModeContext';
 import Account from './pages/Account';
 import Apartments from './pages/Apartments';
 import Booking from './pages/Booking';
@@ -33,9 +34,11 @@ const queryClient = new QueryClient({
 const router = createBrowserRouter([
   {
     element: (
-      <ProtectedRoute>
-        <AppLayout />
-      </ProtectedRoute>
+      <DarkModeProvider>
+        <ProtectedRoute>
+          <AppLayout />
+        </ProtectedRoute>
+      </DarkModeProvider>
     ),
     children: [
       {

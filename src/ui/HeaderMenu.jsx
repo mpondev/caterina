@@ -4,6 +4,7 @@ import { HiOutlineUser } from 'react-icons/hi2';
 import Logout from '../features/authentication/Logout';
 
 import './HeaderMenu.scss';
+import DarkModeToggle from './DarkModeToggle';
 
 function HeaderMenu() {
   const navigate = useNavigate();
@@ -17,6 +18,9 @@ function HeaderMenu() {
       </li>
       <li>
         <Logout />
+      </li>
+      <li>
+        <DarkModeToggle />
       </li>
     </ul>
   );
