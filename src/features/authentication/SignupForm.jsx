@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
-import { useSignup } from './useSignup';
 
-import './SignupForm.scss';
+import { useSignup } from './useSignup';
+import FormRow from '../../ui/FormRow';
 
 // Email regex: /\S+@\S+\.\S+/
 
@@ -21,19 +21,16 @@ function SignupForm() {
 
   return (
     <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
-      <div className="signup-form--row">
-        <label htmlFor="fullName">Nombre completo</label>
+      <FormRow label="Nombre completo" error={errors?.fullName?.message}>
         <input
           type="text"
           id="fullName"
           disabled={isLoading}
           {...register('fullName', { required: 'Este campo es requerido' })}
         />
-        {errors && <span>{errors?.fullName?.message}</span>}
-      </div>
+      </FormRow>
 
-      <div className="signup-form--row">
-        <label htmlFor="email">Dirección de email</label>
+      <FormRow label="Dirección de email" error={errors?.email?.message}>
         <input
           type="email"
           id="email"
@@ -46,11 +43,12 @@ function SignupForm() {
             },
           })}
         />
-        {errors && <span>{errors?.email?.message}</span>}
-      </div>
+      </FormRow>
 
-      <div className="signup-form--row">
-        <label htmlFor="password">Contraseña (min 8 caracteres)</label>
+      <FormRow
+        label="Contraseña (min 8 caracteres)"
+        error={errors?.password?.message}
+      >
         <input
           type="password"
           id="password"
@@ -63,11 +61,12 @@ function SignupForm() {
             },
           })}
         />
-        {errors && <span>{errors?.password?.message}</span>}
-      </div>
+      </FormRow>
 
-      <div className="signup-form--row">
-        <label htmlFor="passwordConfirm">Repita la contraseña</label>
+      <FormRow
+        label="Repita la contraseña"
+        error={errors?.passwordConfirm?.message}
+      >
         <input
           type="password"
           id="passwordConfirm"
@@ -79,21 +78,21 @@ function SignupForm() {
               'Las contraseñas deben ser iguales',
           })}
         />
-        {errors && <span>{errors?.passwordConfirm?.message}</span>}
-      </div>
+      </FormRow>
 
-      <div className="signup-form--row">
-        {/* type is an HTML attribute! */}
+      <FormRow>
         <button
-          className="cancel-btn"
+          className="btn btn--cancel"
           type="reset"
           disabled={isLoading}
           onClick={reset}
         >
           Cancelar
         </button>
-        <button disabled={isLoading}>Crear nuevo usuario</button>
-      </div>
+        <button className="btn" disabled={isLoading}>
+          Crear nuevo usuario
+        </button>
+      </FormRow>
     </form>
   );
 }

@@ -2,8 +2,7 @@ import { useState } from 'react';
 
 import { useUser } from './useUser';
 import { useUpdateUser } from './useUpdateUser';
-
-import './UpdateUserDataForm.scss';
+import FormRow from '../../ui/FormRow';
 
 function UpdateUserDataForm() {
   // We don't need the loading state, and can immediately use the user data, because we know that it has already been loaded at this point
@@ -40,13 +39,11 @@ function UpdateUserDataForm() {
 
   return (
     <form className="update-user-form" onSubmit={handleSubmit}>
-      <div className="update-user-form--row">
-        <label htmlFor="email">Dirección de email</label>
+      <FormRow label="Dirección de email">
         <input value={email} disabled />
-      </div>
+      </FormRow>
 
-      <div className="update-user-form--row">
-        <label htmlFor="fullName">Nombre completo</label>
+      <FormRow label="Nombre completo">
         <input
           type="text"
           value={fullName}
@@ -54,10 +51,9 @@ function UpdateUserDataForm() {
           id="fullName"
           disabled={isUpdating}
         />
-      </div>
+      </FormRow>
 
-      <div className="update-user-form--row">
-        <label htmlFor="avatar">Imagen de avatar</label>
+      <FormRow label="Imagen de avatar">
         <input
           className="file"
           type="file"
@@ -66,19 +62,21 @@ function UpdateUserDataForm() {
           onChange={e => setAvatar(e.target.files[0])}
           disabled={isUpdating}
         />
-      </div>
+      </FormRow>
 
-      <div className="update-user-form--row">
+      <FormRow>
         <button
           type="reset"
-          className="cancel-btn"
+          className="btn btn--cancel"
           disabled={isUpdating}
           onClick={handleCancel}
         >
-          Cancel
+          Cancelar
         </button>
-        <button disabled={isUpdating}>Actualizar cuenta</button>
-      </div>
+        <button className="btn" disabled={isUpdating}>
+          Actualizar cuenta
+        </button>
+      </FormRow>
     </form>
   );
 }

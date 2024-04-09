@@ -13,7 +13,7 @@ function FormRow({ children, error, label }) {
 }
 
 FormRow.propTypes = {
-  children: PropTypes.object,
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   error: PropTypes.string,
   label: PropTypes.string,
 };
