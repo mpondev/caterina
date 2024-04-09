@@ -5,6 +5,7 @@ import { useApartments } from '../apartments/useApartments';
 import Spinner from '../../ui/Spinner';
 
 import './DashboardLayout.scss';
+import SalesChart from './SalesChart';
 
 function DashboardLayout() {
   const { bookings, isLoading: isLoadingBookings } = useRecentBookings();
@@ -31,7 +32,7 @@ function DashboardLayout() {
       />
       <div>Actividad para hoy</div>
       <div>Gráfico de duración de estancia</div>
-      <div>Gráfico de ventas</div>
+      <SalesChart bookings={bookings} numDays={numDays} />
     </div>
   );
 }
