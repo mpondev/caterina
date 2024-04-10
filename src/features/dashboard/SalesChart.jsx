@@ -49,7 +49,10 @@ function SalesChart({ bookings, numDays }) {
 
   return (
     <div className="dashboard-box">
-      <h2>Ventas</h2>
+      <h2>
+        Ventas de {format(allDates.at(0), 'dd MMM yyyy')} &mdash;{' '}
+        {format(allDates.at(-1), 'dd MMM yyyy')}
+      </h2>
 
       <ResponsiveContainer height={300} width="100%">
         <AreaChart data={data}>
