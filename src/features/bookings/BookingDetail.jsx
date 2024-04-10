@@ -20,6 +20,7 @@ function BookingDetail() {
   const navigate = useNavigate();
 
   if (isLoading) return <Spinner />;
+  if (!booking) return <p>La reserva no se ha encontrado.</p>;
 
   const { id: bookingId, status } = booking;
 

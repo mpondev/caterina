@@ -41,6 +41,7 @@ function Toggle({ id }) {
   const { close, open, openId, setPosition } = useContext(MenusContext);
 
   function handleClick(evt) {
+    evt.stopPropagation();
     const rect = evt.target.closest('button').getBoundingClientRect();
 
     setPosition({
@@ -64,7 +65,7 @@ Toggle.propTypes = {
 
 function List({ children, id }) {
   const { close, openId, position } = useContext(MenusContext);
-  const ref = useOutsideClick(close);
+  const ref = useOutsideClick(close, false);
 
   if (openId !== id) return null;
 

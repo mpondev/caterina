@@ -14,7 +14,7 @@ import './ApartmentRow.scss';
 
 function ApartmentRow({ apartment }) {
   const { deleteApartment, isDeleting } = useDeleteApartment();
-  const { createApartment } = useCreateApartment();
+  const { createApartment, isCreating } = useCreateApartment();
 
   const {
     apartment: apartmentName,
@@ -55,7 +55,11 @@ function ApartmentRow({ apartment }) {
             <Menus.Toggle id={apartment.id} />
 
             <Menus.List id={apartment.id}>
-              <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
+              <Menus.Button
+                icon={<HiSquare2Stack />}
+                onClick={handleDuplicate}
+                disabled={isCreating}
+              >
                 Duplicate
               </Menus.Button>
 
