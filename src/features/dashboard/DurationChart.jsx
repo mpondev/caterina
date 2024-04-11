@@ -7,7 +7,7 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from 'recharts';
-import { useDarkMode } from '../../context/DarkModeContext';
+import useDarkMode from '../../context/useDarkMode';
 
 import './DurationChart.scss';
 

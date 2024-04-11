@@ -5,7 +5,7 @@ function Dashboard() {
   return (
     <>
       <div className="dashboard-row">
-        <h1>Dashboard</h1>
+        <h1>Panel de Control</h1>
         <DashboardFilter />
       </div>
       <DashboardLayout />
