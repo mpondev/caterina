@@ -6,6 +6,8 @@ function fromToday(numDays, withTime = false) {
   return date.toISOString().slice(0, -1);
 }
 
+// async function getGuestId() {}
+
 export const bookings = [
   // CABIN 001
   {

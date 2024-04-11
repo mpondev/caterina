@@ -2,11 +2,18 @@
   margin-top: auto;
   background-color: #e0e7ff;
   padding: 8px;
-  border-radius: 5px;
+  border-radius: var(--border-radius-sm);
   text-align: center;
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  h3 {
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--color-brand-800);
+  }
 
   button {
     border: none;

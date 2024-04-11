@@ -43,16 +43,16 @@ async function createApartments() {
 
 async function createBookings() {
   // Bookings need a guestId and a apartmentId. We can't tell Supabase IDs for each object, it will calculate them on its own. So it might be different for different people, especially after multiple uploads. Therefore, we need to first get all guestIds and apartmentIds, and then replace the original IDs in the booking data with the actual ones from the DB
-  const { data: guests_ids } = await supabase
+  const { data: guestsIds } = await supabase
     .from('guests')
     .select('id')
     .order('id');
-  const allGuestIds = guests_ids.map(apartment => apartment.id);
-  const { data: apartments_ids } = await supabase
+  const allGuestIds = guestsIds.map(apartment => apartment.id);
+  const { data: apartmentsIds } = await supabase
     .from('apartments')
     .select('id')
     .order('id');
-  const allApartmentIds = apartments_ids.map(apartment => apartment.id);
+  const allApartmentIds = apartmentsIds.map(apartment => apartment.id);
 
   const finalBookings = bookings.map(booking => {
     // Here relying on the order of apartments, as they don't have and ID yet
@@ -90,7 +90,7 @@ async function createBookings() {
       apartment_price,
       extras_price,
       total_price,
-      guest_id: allGuestIds.at(booking.guestId - 1),
+      guest_id: allGuestIds.at(booking.guest_id - 1),
       apartment_id: allApartmentIds.at(booking.apartment_id - 1),
       status,
     };

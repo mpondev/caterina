@@ -1,16 +1,13 @@
-// Search for: 'jo', 'fa', 'mar', 'emm', 'ah'
-
 export const guests = [
   {
-    // id: 1000,
-    full_name: 'Jonas Schmedtmann',
+    full_name: 'Paolo Viera',
     email: 'hello@jonas.io',
     nationality: 'Portugal',
     national_id: '3525436345',
     country_flag: 'https://flagcdn.com/pt.svg',
   },
   {
-    full_name: 'Jonathan Smith',
+    full_name: 'Josh Ford',
     email: 'johnsmith@test.eu',
     nationality: 'Great Britain',
     national_id: '4534593454',
@@ -24,28 +21,26 @@ export const guests = [
     country_flag: 'https://flagcdn.com/fi.svg',
   },
   {
-    full_name: 'Jonas Mueller',
+    full_name: 'Adolf Mueller',
     email: 'jonas@example.eu',
     nationality: 'Germany',
     national_id: '1233212288',
     country_flag: 'https://flagcdn.com/de.svg',
   },
   {
-    full_name: 'Jonas Anderson',
+    full_name: 'Carlos Ortega',
     email: 'anderson@example.com',
     nationality: 'Bolivia (Plurinational State of)',
     national_id: '0988520146',
     country_flag: 'https://flagcdn.com/bo.svg',
   },
   {
-    full_name: 'Jonathan Williams',
+    full_name: 'Kevin Williams',
     email: 'jowi@gmail.com',
     nationality: 'United States of America',
     national_id: '633678543',
     country_flag: 'https://flagcdn.com/us.svg',
   },
-
-  // GPT
   {
     full_name: 'Emma Watson',
     email: 'emma@gmail.com',
@@ -61,7 +56,7 @@ export const guests = [
     country_flag: 'https://flagcdn.com/eg.svg',
   },
   {
-    full_name: 'Maria Rodriguez',
+    full_name: 'María Rodríguez',
     email: 'maria@gmail.com',
     nationality: 'Spain',
     national_id: '1098765321',
@@ -82,14 +77,14 @@ export const guests = [
     country_flag: 'https://flagcdn.com/sd.svg',
   },
   {
-    full_name: 'Gabriel Silva',
+    full_name: 'Edmundo Silva',
     email: 'gabriel@gmail.com',
     nationality: 'Brazil',
     national_id: '109283465',
     country_flag: 'https://flagcdn.com/br.svg',
   },
   {
-    full_name: 'Maria Gomez',
+    full_name: 'Guadalupe Gomez',
     email: 'maria@example.com',
     nationality: 'Mexico',
     national_id: '108765421',
@@ -124,8 +119,8 @@ export const guests = [
     country_flag: 'https://flagcdn.com/au.svg',
   },
   {
-    full_name: 'Marie Dupont',
-    email: 'marie@gmail.com',
+    full_name: 'Antoine Dupont',
+    email: 'antoine@gmail.com',
     nationality: 'France',
     national_id: '06934233728',
     country_flag: 'https://flagcdn.com/fr.svg',
@@ -194,7 +189,7 @@ export const guests = [
     country_flag: 'https://flagcdn.com/ca.svg',
   },
   {
-    full_name: 'Juan Hernandez',
+    full_name: 'Lautaro Hernandez',
     email: 'juan@yahoo.com',
     nationality: 'Argentina',
     national_id: '4343433333',
