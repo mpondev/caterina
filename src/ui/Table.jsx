@@ -25,7 +25,7 @@ function Header({ children }) {
 
   return (
     <header
-      className="header"
+      className="table-header"
       role="row"
       style={{ gridTemplateColumns: `${columns}` }}
     >
@@ -43,7 +43,7 @@ function Row({ children }) {
 
   return (
     <div
-      className="row"
+      className="table-row"
       role="row"
       style={{ gridTemplateColumns: `${columns}` }}
     >
@@ -58,9 +58,11 @@ Row.propTypes = {
 
 function Body({ data, render }) {
   if (!data.length)
-    return <p className="empty">No hay datos para mostrar por el momento</p>;
+    return (
+      <p className="table-empty">No hay datos para mostrar por el momento</p>
+    );
 
-  return <section className="body">{data.map(render)}</section>;
+  return <section className="table-body">{data.map(render)}</section>;
 }
 
 Body.propTypes = {
@@ -69,7 +71,7 @@ Body.propTypes = {
 };
 
 function Footer({ children }) {
-  return <footer className="footer">{children}</footer>;
+  return <footer className="table-footer">{children}</footer>;
 }
 
 Footer.propTypes = {

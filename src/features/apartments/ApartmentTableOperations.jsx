@@ -21,19 +21,19 @@ function ApartmentTableOperations() {
           { value: 'apartment-desc', label: 'Ordenar por nombre (Z-A)' },
           {
             value: 'regular_price-asc',
-            label: 'Ordenar por precio (primero más bajo)',
+            label: 'Ordenar por precio (primero menor)',
           },
           {
             value: 'regular_price-desc',
-            label: 'Ordenar por precio (primero más alto)',
+            label: 'Ordenar por precio (primero mayor)',
           },
           {
             value: 'max_capacity-asc',
-            label: 'Ordenar por capacidad (primero más bajo)',
+            label: 'Ordenar por capacidad (primero menor)',
           },
           {
             value: 'max_capacity-desc',
-            label: 'Ordenar por capacidad (primero más alto)',
+            label: 'Ordenar por capacidad (primero mayor)',
           },
         ]}
       />

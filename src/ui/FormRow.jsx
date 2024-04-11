@@ -7,7 +7,7 @@ function FormRow({ children, error, label }) {
     <div className="formRow">
       {label && <label htmlFor={children.props.id}>{label}</label>}
       {children}
-      {error && <span>{error}</span>}
+      {error && <span className="form-error">{error}</span>}
     </div>
   );
 }

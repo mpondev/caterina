@@ -20,7 +20,7 @@ function Menus({ children }) {
     <MenusContext.Provider
       value={{ close, open, openId, position, setPosition }}
     >
-      <div>{children}</div>
+      {children}
     </MenusContext.Provider>
   );
 }
@@ -53,7 +53,7 @@ function Toggle({ id }) {
   }
 
   return (
-    <button className="toggle-btn" onClick={handleClick}>
+    <button className="menu-toggle-btn" onClick={handleClick}>
       <HiEllipsisVertical />
     </button>
   );

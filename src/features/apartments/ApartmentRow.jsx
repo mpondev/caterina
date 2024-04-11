@@ -41,7 +41,7 @@ function ApartmentRow({ apartment }) {
     <Table.Row className="apartmentRow">
       <img src={image} alt="apartment image" className="apartmentRow--img" />
       <div className="apartmentRow--name">{apartmentName}</div>
-      <div>Hasta {max_capacity} personas</div>
+      <div>Max. {max_capacity} personas</div>
       <div className="apartmentRow--price">{formatCurrency(regular_price)}</div>
       {discount ? (
         <div className="apartmentRow--discount">{formatCurrency(discount)}</div>
@@ -60,15 +60,15 @@ function ApartmentRow({ apartment }) {
                 onClick={handleDuplicate}
                 disabled={isCreating}
               >
-                Duplicate
+                Duplicar
               </Menus.Button>
 
               <Modal.Open opens="edit">
-                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+                <Menus.Button icon={<HiPencil />}>Editar</Menus.Button>
               </Modal.Open>
 
               <Modal.Open opens="delete">
-                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+                <Menus.Button icon={<HiTrash />}>Eliminar</Menus.Button>
               </Modal.Open>
             </Menus.List>
 
