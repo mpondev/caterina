@@ -1,4 +1,4 @@
-@keyframes rotate {
+@keyframes rotateSpinner {
   to {
     transform: rotate(1turn);
   }
@@ -14,5 +14,5 @@
     conic-gradient(#0000 30%, var(--color-brand-600));
   mask: radial-gradient(farthest-side, #0000 calc(100% - 10px), #000 0);
   -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 10px), #000 0);
-  animation: rotate 1.5s infinite linear;
+  animation: rotateSpinner 1.5s infinite linear;
 }

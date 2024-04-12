@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { useSignup } from './useSignup';
 import FormRow from '../../ui/FormRow';
 
+import './SignupForm.scss';
+
 // Email regex: /\S+@\S+\.\S+/
 
 function SignupForm() {
@@ -89,7 +91,7 @@ function SignupForm() {
         >
           Cancelar
         </button>
-        <button className="btn" disabled={isLoading}>
+        <button className="signup-form--btn" disabled={isLoading}>
           Crear nuevo usuario
         </button>
       </FormRow>

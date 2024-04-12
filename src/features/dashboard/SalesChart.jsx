@@ -48,7 +48,7 @@ function SalesChart({ bookings, numDays }) {
       };
 
   return (
-    <div className="dashboard-box">
+    <div className="sales-chart-box">
       <h2>
         Ventas de {format(allDates.at(0), 'dd MMM yyyy')} &mdash;{' '}
         {format(allDates.at(-1), 'dd MMM yyyy')}

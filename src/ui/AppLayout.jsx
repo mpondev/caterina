@@ -10,8 +10,8 @@ function AppLayout() {
     <div className="appLayout">
       <Header />
       <Sidebar />
-      <main>
-        <div className="container">
+      <main className="appLayout--main">
+        <div className="appLayout--main--container">
           <Outlet />
         </div>
       </main>

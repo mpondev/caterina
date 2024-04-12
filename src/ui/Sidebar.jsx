@@ -6,7 +6,7 @@ import './Sidebar.scss';
 
 function Sidebar() {
   return (
-    <aside>
+    <aside className="sidebar">
       <Logo />
       <MainNav />
 

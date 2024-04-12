@@ -29,8 +29,8 @@ function BookingDataBox({ booking }) {
   } = booking;
 
   return (
-    <section className="data-box">
-      <header className="data-box--header">
+    <section className="booking-data-box">
+      <header className="booking-data-box--header">
         <div>
           <HiOutlineHomeModern />
           <p>
@@ -47,7 +47,7 @@ function BookingDataBox({ booking }) {
         </p>
       </header>
 
-      <section className="data-box--section">
+      <section className="booking-data-box--section">
         <div className="guest">
           {country_flag && (
             <img src={country_flag} alt={`Flag of ${country}`} />

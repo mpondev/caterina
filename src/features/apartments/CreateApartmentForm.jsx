@@ -47,7 +47,11 @@ function CreateApartmentForm({ apartmentToEdit = {}, onCloseModal }) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className={onCloseModal ? 'modalStyle' : 'regularStyle'}
+      className={
+        onCloseModal
+          ? 'apartment-form modalStyle'
+          : 'apartment-form regularStyle'
+      }
     >
       <FormRow label="Apartamento" error={errors?.apartment?.message}>
         <input

@@ -1,4 +1,4 @@
-@keyframes rotate {
+@keyframes rotateSpinnerMini {
   to {
     transform: rotate(1turn);
   }
@@ -7,5 +7,5 @@
 .spinner-mini-icon {
   width: 2.4rem;
   height: 2.4rem;
-  // animation: rotate 1.5s infinite linear;
+  animation: rotateSpinnerMini 1.5s infinite linear;
 }

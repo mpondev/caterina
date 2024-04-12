@@ -1,9 +1,9 @@
-ul {
+.nav-list {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
 
-  .mainNavLink {
+  &--link {
     &:link,
     &:visited {
       display: flex;

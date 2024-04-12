@@ -1,7 +1,9 @@
 {
-  "name": "santa-catalina",
+  "name": "apartamentos-caterina",
+  "homepage": "https://caterina.mpondev.com",
   "private": true,
-  "version": "0.0.1",
+  "version": "1.0.1",
+  "description": "App to manage apartments bookings",
   "type": "module",
   "scripts": {
     "dev": "vite",

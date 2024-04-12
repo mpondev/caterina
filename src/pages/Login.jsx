@@ -7,7 +7,7 @@ function Login() {
   return (
     <main className="login-layout">
       <Logo />
-      <h1>Iniciar sesión</h1>
+      <h4 className="login-layout--title">Iniciar sesión</h4>
       <LoginForm />
     </main>
   );

@@ -12,33 +12,33 @@ import './MainNav.scss';
 function MainNav() {
   return (
     <nav>
-      <ul>
+      <ul className="nav-list">
         <li>
-          <NavLink to="/dashboard" className="mainNavLink">
+          <NavLink to="/dashboard" className="nav-list--link">
             <HiOutlineHome />
             <span>Inicio</span>
           </NavLink>
         </li>
         <li>
-          <NavLink to="/bookings" className="mainNavLink">
+          <NavLink to="/bookings" className="nav-list--link">
             <HiOutlineCalendarDays />
             <span>Reservas</span>
           </NavLink>
         </li>
         <li>
-          <NavLink to="/cabins" className="mainNavLink">
+          <NavLink to="/cabins" className="nav-list--link">
             <HiOutlineHomeModern />
             <span>Apartamentos</span>
           </NavLink>
         </li>
         <li>
-          <NavLink to="/users" className="mainNavLink">
+          <NavLink to="/users" className="nav-list--link">
             <HiOutlineUsers />
             <span>Usuarios</span>
           </NavLink>
         </li>
         <li>
-          <NavLink to="/settings" className="mainNavLink">
+          <NavLink to="/settings" className="nav-list--link">
             <HiOutlineCog6Tooth />
             <span>Ajustes</span>
           </NavLink>

@@ -5,7 +5,7 @@ import './Header.scss';
 
 function Header() {
   return (
-    <header>
+    <header className="header">
       <UserAvatar />
       <HeaderMenu />
     </header>

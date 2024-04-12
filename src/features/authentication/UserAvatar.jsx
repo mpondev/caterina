@@ -8,7 +8,11 @@ function UserAvatar() {
 
   return (
     <div className="user-avatar">
-      <img src={avatar || 'default-user.jpg'} alt={`Avatar of ${fullName}`} />
+      <img
+        src={avatar || 'default-user.jpg'}
+        alt={`Avatar of ${fullName}`}
+        className="user-avatar--img"
+      />
       <span>{fullName}</span>
     </div>
   );

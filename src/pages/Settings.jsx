@@ -5,10 +5,10 @@ import './Settings.scss';
 function Settings() {
   return (
     <>
-      <div className="row">
+      <div className="settings-row">
         <h1>Actualizar ajustes</h1>
+        <UpdateSettingsForm />
       </div>
-      <UpdateSettingsForm />
     </>
   );
 }
