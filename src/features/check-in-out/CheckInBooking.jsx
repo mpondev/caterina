@@ -54,7 +54,7 @@ function CheckInBooking() {
   }
 
   return (
-    <>
+    <div className="checkin-booking">
       <div className="checkin">
         <h1>Check in Reserva #{bookingId}</h1>
         <button className="back-btn" onClick={moveBack}>
@@ -65,7 +65,7 @@ function CheckInBooking() {
       <BookingDataBox booking={booking} />
 
       {!has_breakfast && (
-        <div className="check-box">
+        <div className="checkin-check-box">
           <Checkbox
             checked={addBreakfast}
             onChange={() => {
@@ -80,7 +80,7 @@ function CheckInBooking() {
         </div>
       )}
 
-      <div className="check-box">
+      <div className="checkin-check-box">
         <Checkbox
           checked={confirmPaid}
           onChange={() => setConfirmPaid(confirm => !confirm)}
@@ -98,7 +98,7 @@ function CheckInBooking() {
         </Checkbox>
       </div>
 
-      <div className="btn-group">
+      <div className="checkin-btn-group">
         <button
           className="checkin-btn"
           onClick={handleCheckIn}
@@ -111,7 +111,7 @@ function CheckInBooking() {
           Volver
         </button>
       </div>
-    </>
+    </div>
   );
 }
 

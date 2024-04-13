@@ -97,7 +97,7 @@ function BookingDataBox({ booking }) {
         </div>
       </section>
 
-      <footer>
+      <footer className="booking-data-box--footer">
         <p>Reservado {format(new Date(created_at), 'EEE, MMM dd yyyy, p')}</p>
       </footer>
     </section>
